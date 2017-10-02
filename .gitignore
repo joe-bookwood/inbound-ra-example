@@ -1,2 +1,5 @@
 /.README.md.swp
 /target/
+/.classpath
+/.project
+/.settings/
