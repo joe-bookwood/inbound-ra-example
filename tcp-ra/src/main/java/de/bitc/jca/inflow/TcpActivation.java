@@ -31,78 +31,81 @@ import javax.resource.spi.endpoint.MessageEndpointFactory;
  *
  * @version $Revision: $
  */
-public class TcpActivation
-{
+public class TcpActivation {
 
-   /** The resource adapter */
-   private TcpResourceAdapter ra;
+    /** The resource adapter */
+    private TcpResourceAdapter ra;
 
-   /** Activation spec */
-   private TcpActivationSpec spec;
+    /** Activation spec */
+    private TcpActivationSpec spec;
 
-   /** The message endpoint factory */
-   private MessageEndpointFactory endpointFactory;
+    /** The message endpoint factory */
+    private MessageEndpointFactory endpointFactory;
 
-   /**
-    * Default constructor
-    * @exception ResourceException Thrown if an error occurs
-    */
-   public TcpActivation() throws ResourceException
-   {
-      this(null, null, null);
-   }
+    /**
+     * Default constructor
+     * 
+     * @exception ResourceException
+     *                Thrown if an error occurs
+     */
+    public TcpActivation() throws ResourceException {
+        this(null, null, null);
+    }
 
-   /**
-    * Constructor
-    * @param ra TcpResourceAdapter
-    * @param endpointFactory MessageEndpointFactory
-    * @param spec TcpActivationSpec
-    * @exception ResourceException Thrown if an error occurs
-    */
-   public TcpActivation(TcpResourceAdapter ra, 
-      MessageEndpointFactory endpointFactory,
-      TcpActivationSpec spec) throws ResourceException
+    /**
+     * Constructor
+     * 
+     * @param ra
+     *            TcpResourceAdapter
+     * @param endpointFactory
+     *            MessageEndpointFactory
+     * @param spec
+     *            TcpActivationSpec
+     * @exception ResourceException
+     *                Thrown if an error occurs
+     */
+    public TcpActivation(TcpResourceAdapter ra, MessageEndpointFactory endpointFactory, TcpActivationSpec spec)
+            throws ResourceException
 
-   {
-      this.ra = ra;
-      this.endpointFactory = endpointFactory;
-      this.spec = spec;
-   }
+    {
+        this.ra = ra;
+        this.endpointFactory = endpointFactory;
+        this.spec = spec;
+    }
 
-   /**
-    * Get activation spec class
-    * @return Activation spec
-    */
-   public TcpActivationSpec getActivationSpec()
-   {
-      return spec;
-   }
+    /**
+     * Get activation spec class
+     * 
+     * @return Activation spec
+     */
+    public TcpActivationSpec getActivationSpec() {
+        return spec;
+    }
 
-   /**
-    * Get message endpoint factory
-    * @return Message endpoint factory
-    */
-   public MessageEndpointFactory getMessageEndpointFactory()
-   {
-      return endpointFactory;
-   }
+    /**
+     * Get message endpoint factory
+     * 
+     * @return Message endpoint factory
+     */
+    public MessageEndpointFactory getMessageEndpointFactory() {
+        return endpointFactory;
+    }
 
-   /**
-    * Start the activation
-    * @throws ResourceException Thrown if an error occurs
-    */
-   public void start() throws ResourceException
-   {
+    /**
+     * Start the activation
+     * 
+     * @throws ResourceException
+     *             Thrown if an error occurs
+     */
+    public void start() throws ResourceException {
 
-   }
+    }
 
-   /**
-    * Stop the activation
-    */
-   public void stop()
-   {
+    /**
+     * Stop the activation
+     */
+    public void stop() {
 
-   }
-
+    }
 
 }

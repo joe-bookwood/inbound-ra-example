@@ -26,11 +26,12 @@ package de.bitc.jca.inflow;
  *
  * @version $Revision: $
  */
-public interface TcpMessageListener
-{
-   /**
-    * Receive message
-    * @param msg String.
-    */
-   public void onMessage(String msg);
+public interface TcpMessageListener {
+    /**
+     * Receive message
+     * 
+     * @param msg
+     *            String.
+     */
+    public void onMessage(String msg);
 }

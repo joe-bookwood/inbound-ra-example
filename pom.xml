@@ -1,0 +1,71 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>de.bitc</groupId>
+  <artifactId>inbound-ra-example</artifactId>
+  <name>Inbound resource adapter example</name>
+
+  <version>0.0.1-SNAPSHOT</version>
+  <packaging>pom</packaging>
+  <properties>
+    <version.maven.compiler.plugin>3.6.1</version.maven.compiler.plugin>
+  </properties>
+  <modules>
+    <module>ra-user-ejb</module>
+    <module>tcp-eis</module>
+    <module>tcp-ra</module>
+  </modules>
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>javax</groupId>
+        <artifactId>javaee-api</artifactId>
+        <version>7.0</version>
+        <scope>provided</scope>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+  <build>
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-compiler-plugin</artifactId>
+          <version>${version.maven.compiler.plugin}</version>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+  </build>
+  <profiles>
+    <profile>
+      <id>formatter</id>
+      <!-- Format the project to reduce merge conflicts -->
+      <!-- http://code.revelc.net/formatter-maven-plugin/formatter-maven-plugin/examples.html -->
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>net.revelc.code.formatter</groupId>
+            <artifactId>formatter-maven-plugin</artifactId>
+            <version>2.0.2-SNAPSHOT</version>
+            <executions>
+              <execution>
+                <goals>
+                  <goal>format</goal>
+                </goals>
+                <configuration>
+                </configuration>
+              </execution>
+            </executions>
+            <configuration>
+              <configFile>eclipse/formatter.xml</configFile>
+              <directories>
+                <directory>${project.directory}/tcp-eis/src/main/java</directory>
+                <directory>${project.directory}/tcp-eis/src/test/java</directory>
+              </directories>
+            </configuration>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
+</project>

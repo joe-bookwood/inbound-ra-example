@@ -21,149 +21,190 @@
  */
 package de.bitc.jca;
 
-import de.bitc.jca.inflow.TcpActivation;
-import de.bitc.jca.inflow.TcpActivationSpec;
-
 import java.util.concurrent.ConcurrentHashMap;
-
 import java.util.logging.Logger;
 
 import javax.resource.ResourceException;
 import javax.resource.spi.ActivationSpec;
 import javax.resource.spi.BootstrapContext;
+import javax.resource.spi.ConfigProperty;
 import javax.resource.spi.Connector;
 import javax.resource.spi.ResourceAdapter;
 import javax.resource.spi.ResourceAdapterInternalException;
 import javax.resource.spi.endpoint.MessageEndpointFactory;
-
 import javax.transaction.xa.XAResource;
+
+import de.bitc.jca.inflow.TcpActivation;
+import de.bitc.jca.inflow.TcpActivationSpec;
 
 /**
  * TcpResourceAdapter
  *
  * @version $Revision: $
  */
-@Connector
-public class TcpResourceAdapter implements ResourceAdapter, java.io.Serializable
-{
+@Connector(displayName = "tcp-ra",
+    description = "TCP Recource Adapter",
+    eisType = "TCP Recource Adapter",
+    version = "7.0")
+public class TcpResourceAdapter implements ResourceAdapter, java.io.Serializable {
 
-   /** The serial version UID */
-   private static final long serialVersionUID = 1L;
+    /** The serial version UID */
+    private static final long serialVersionUID = 1L;
 
-   /** The logger */
-   private static Logger log = Logger.getLogger(TcpResourceAdapter.class.getName());
+    /** The logger */
+    private static Logger log = Logger.getLogger(TcpResourceAdapter.class.getName());
 
-   /** The activations by activation spec */
-   private ConcurrentHashMap<TcpActivationSpec, TcpActivation> activations;
+    /** The activations by activation spec */
+    private ConcurrentHashMap<TcpActivationSpec, TcpActivation> activations;
 
-   /**
-    * Default constructor
-    */
-   public TcpResourceAdapter()
-   {
-      this.activations = new ConcurrentHashMap<TcpActivationSpec, TcpActivation>();
+    /** port */
+    @ConfigProperty(defaultValue = "10345")
+    private Integer port;
 
-   }
+    /**
+     * Default constructor
+     */
+    public TcpResourceAdapter() {
+        this.activations = new ConcurrentHashMap<TcpActivationSpec, TcpActivation>();
 
-   /**
-    * This is called during the activation of a message endpoint.
-    *
-    * @param endpointFactory A message endpoint factory instance.
-    * @param spec An activation spec JavaBean instance.
-    * @throws ResourceException generic exception 
-    */
-   public void endpointActivation(MessageEndpointFactory endpointFactory,
-      ActivationSpec spec) throws ResourceException
-   {
-      TcpActivation activation = new TcpActivation(this, endpointFactory, (TcpActivationSpec)spec);
-      activations.put((TcpActivationSpec)spec, activation);
-      activation.start();
+    }
 
-      log.finest("endpointActivation()");
+    /**
+     * Set port
+     *
+     * @param port
+     *            The value
+     */
+    public void setPort(Integer port) {
+        this.port = port;
+    }
 
-   }
+    /**
+     * Get port
+     *
+     * @return The value
+     */
+    public Integer getPort() {
+        return port;
+    }
 
-   /**
-    * This is called when a message endpoint is deactivated. 
-    *
-    * @param endpointFactory A message endpoint factory instance.
-    * @param spec An activation spec JavaBean instance.
-    */
-   public void endpointDeactivation(MessageEndpointFactory endpointFactory,
-      ActivationSpec spec)
-   {
-      TcpActivation activation = activations.remove(spec);
-      if (activation != null)
-         activation.stop();
+    /**
+     * This is called during the activation of a message endpoint.
+     *
+     * @param endpointFactory
+     *            A message endpoint factory instance.
+     * @param spec
+     *            An activation spec JavaBean instance.
+     * @throws ResourceException
+     *             generic exception
+     */
+    @Override
+    public void endpointActivation(MessageEndpointFactory endpointFactory, ActivationSpec spec)
+            throws ResourceException {
+        TcpActivation activation = new TcpActivation(this, endpointFactory, (TcpActivationSpec) spec);
+        activations.put((TcpActivationSpec) spec, activation);
+        activation.start();
 
-      log.finest("endpointDeactivation()");
+        log.finest("endpointActivation()");
 
-   }
+    }
 
-   /**
-    * This is called when a resource adapter instance is bootstrapped.
-    *
-    * @param ctx A bootstrap context containing references 
-    * @throws ResourceAdapterInternalException indicates bootstrap failure.
-    */
-   public void start(BootstrapContext ctx)
-      throws ResourceAdapterInternalException
-   {
-      log.finest("start()");
+    /**
+     * This is called when a message endpoint is deactivated.
+     *
+     * @param endpointFactory
+     *            A message endpoint factory instance.
+     * @param spec
+     *            An activation spec JavaBean instance.
+     */
+    @Override
+    public void endpointDeactivation(MessageEndpointFactory endpointFactory, ActivationSpec spec) {
+        TcpActivation activation = activations.remove(spec);
+        if (activation != null)
+            activation.stop();
 
-   }
+        log.finest("endpointDeactivation()");
 
-   /**
-    * This is called when a resource adapter instance is undeployed or
-    * during application server shutdown. 
-    */
-   public void stop()
-   {
-      log.finest("stop()");
+    }
 
-   }
+    /**
+     * This is called when a resource adapter instance is bootstrapped.
+     *
+     * @param ctx
+     *            A bootstrap context containing references
+     * @throws ResourceAdapterInternalException
+     *             indicates bootstrap failure.
+     */
+    @Override
+    public void start(BootstrapContext ctx) throws ResourceAdapterInternalException {
+        log.finest("start()");
 
-   /**
-    * This method is called by the application server during crash recovery.
-    *
-    * @param specs An array of ActivationSpec JavaBeans 
-    * @throws ResourceException generic exception 
-    * @return An array of XAResource objects
-    */
-   public XAResource[] getXAResources(ActivationSpec[] specs)
-      throws ResourceException
-   {
-      log.finest("getXAResources()");
-      return null;
-   }
+    }
 
-   /** 
-    * Returns a hash code value for the object.
-    * @return A hash code value for this object.
-    */
-   @Override
-   public int hashCode()
-   {
-      int result = 17;
-      return result;
-   }
+    /**
+     * This is called when a resource adapter instance is undeployed or during
+     * application server shutdown.
+     */
+    @Override
+    public void stop() {
+        log.finest("stop()");
 
-   /** 
-    * Indicates whether some other object is equal to this one.
-    * @param other The reference object with which to compare.
-    * @return true if this object is the same as the obj argument, false otherwise.
-    */
-   @Override
-   public boolean equals(Object other)
-   {
-      if (other == null)
-         return false;
-      if (other == this)
-         return true;
-      if (!(other instanceof TcpResourceAdapter))
-         return false;
-      boolean result = true;
-      return result;
-   }
+    }
+
+    /**
+     * This method is called by the application server during crash recovery.
+     *
+     * @param specs
+     *            An array of ActivationSpec JavaBeans
+     * @throws ResourceException
+     *             generic exception
+     * @return An array of XAResource objects
+     */
+    @Override
+    public XAResource[] getXAResources(ActivationSpec[] specs) throws ResourceException {
+        log.finest("getXAResources()");
+        return null;
+    }
+
+    /**
+     * Returns a hash code value for the object.
+     *
+     * @return A hash code value for this object.
+     */
+    @Override
+    public int hashCode() {
+        int result = 17;
+        if (port != null)
+            result += 31 * result + 7 * port.hashCode();
+        else
+            result += 31 * result + 7;
+        return result;
+    }
+
+    /**
+     * Indicates whether some other object is equal to this one.
+     *
+     * @param other
+     *            The reference object with which to compare.
+     * @return true if this object is the same as the obj argument, false otherwise.
+     */
+    @Override
+    public boolean equals(Object other) {
+        if (other == null)
+            return false;
+        if (other == this)
+            return true;
+        if (!(other instanceof TcpResourceAdapter))
+            return false;
+        boolean result = true;
+        TcpResourceAdapter obj = (TcpResourceAdapter) other;
+        if (result) {
+            if (port == null)
+                result = obj.getPort() == null;
+            else
+                result = port.equals(obj.getPort());
+        }
+        return result;
+    }
 
 }

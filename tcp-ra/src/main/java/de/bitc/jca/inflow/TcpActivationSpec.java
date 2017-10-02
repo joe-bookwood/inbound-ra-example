@@ -28,6 +28,7 @@ import javax.resource.spi.ActivationSpec;
 import javax.resource.spi.ConfigProperty;
 import javax.resource.spi.InvalidPropertyException;
 import javax.resource.spi.ResourceAdapter;
+import javax.validation.constraints.NotNull;
 
 /**
  * TcpActivationSpec
@@ -35,78 +36,76 @@ import javax.resource.spi.ResourceAdapter;
  * @version $Revision: $
  */
 @Activation(messageListeners = { de.bitc.jca.inflow.TcpMessageListener.class })
-public class TcpActivationSpec implements ActivationSpec
-{
+public class TcpActivationSpec implements ActivationSpec {
 
-   /** The logger */
-   private static Logger log = Logger.getLogger(TcpActivationSpec.class.getName());
+    /** The logger */
+    private static Logger log = Logger.getLogger(TcpActivationSpec.class.getName());
 
-   /** The resource adapter */
-   private ResourceAdapter ra;
+    /** The resource adapter */
+    private ResourceAdapter ra;
 
-   /** port */
-   @ConfigProperty(defaultValue = "12000")
-   private String port;
+    /** topic */
+    @ConfigProperty(defaultValue = "topic1")
+    @NotNull
+    private String topic;
 
-   /**
-    * Default constructor
-    */
-   public TcpActivationSpec()
-   {
+    /**
+     * Default constructor
+     */
+    public TcpActivationSpec() {
 
-   }
+    }
 
-   /** 
-    * Set port
-    * @param port The value
-    */
-   public void setPort(String port)
-   {
-      this.port = port;
-   }
+    /**
+     * Set topic
+     * 
+     * @param topic
+     *            The value
+     */
+    public void setTopic(String topic) {
+        this.topic = topic;
+    }
 
-   /** 
-    * Get port
-    * @return The value
-    */
-   public String getPort()
-   {
-      return port;
-   }
+    /**
+     * Get topic
+     * 
+     * @return The value
+     */
+    public String getTopic() {
+        return topic;
+    }
 
-   /**
-    * This method may be called by a deployment tool to validate the overall
-    * activation configuration information provided by the endpoint deployer.
-    *
-    * @throws InvalidPropertyException indicates invalid configuration property settings.
-    */
-   public void validate() throws InvalidPropertyException
-   {
-      log.finest("validate()");
+    /**
+     * This method may be called by a deployment tool to validate the overall
+     * activation configuration information provided by the endpoint deployer.
+     *
+     * @throws InvalidPropertyException
+     *             indicates invalid configuration property settings.
+     */
+    public void validate() throws InvalidPropertyException {
+        log.finest("validate()");
 
-   }
+    }
 
-   /**
-    * Get the resource adapter
-    *
-    * @return The handle
-    */
-   public ResourceAdapter getResourceAdapter()
-   {
-      log.finest("getResourceAdapter()");
-      return ra;
-   }
+    /**
+     * Get the resource adapter
+     *
+     * @return The handle
+     */
+    public ResourceAdapter getResourceAdapter() {
+        log.finest("getResourceAdapter()");
+        return ra;
+    }
 
-   /**
-    * Set the resource adapter
-    *
-    * @param ra The handle
-    */
-   public void setResourceAdapter(ResourceAdapter ra)
-   {
-      log.finest("setResourceAdapter()");
-      this.ra = ra;
-   }
-
+    /**
+     * Set the resource adapter
+     *
+     * @param ra
+     *            The handle
+     */
+    public void setResourceAdapter(ResourceAdapter ra) {
+        log.finest("setResourceAdapter()");
+        this.ra = ra;
+    }
 
 }

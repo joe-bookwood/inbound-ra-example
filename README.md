@@ -35,29 +35,35 @@ I will use the rar packaging format in this example.
 - **tcp-eis** the as rar packaged inbound resource adapter 
 
 At first I generated the resource adapter with:
+
 ```
-% ./codegenerator.sh
-Profile version (1.7/1.6/1.5/1.0) [1.7]:
+doc/codegenerator (git)-[ironjacamar-1.3.5.Final] % ./codegenerator.sh 
+Profile version (1.7/1.6/1.5/1.0) [1.7]: 
 Type (O/Outbound/I/Inbound/B/Bidirectional) [O]: I
 Package name: de.bitc.jca
-Use annotations (Y/Yes/N/No) [Y]:
+Use annotations (Y/Yes/N/No) [Y]: 
 Resource adapter class name [AcmeResourceAdapter]: TcpResourceAdapter
-Should the resource adapter class be Serializable (Y/Yes/N/No) [Y]:
-Resource adapter config properties [enter to quit]:
-    Name:
-MessageListener interface name [TcpMessageListener]:
-ActivationSpec class name [TcpActivationSpec]:
-ActivationSpec config properties [enter to quit]:
+Should the resource adapter class be Serializable (Y/Yes/N/No) [Y]: Y
+Resource adapter config properties [enter to quit]: 
     Name: port
-    Type: String
-    Value: 12000
-    Required (Y/Yes/N/No) [N]:
+    Type: Integer
+    Value: 10345 
 
-ActivationSpec config properties [enter to quit]:
-    Name:
-Activation class name [TcpActivation]:
-Include an admin object (Y/Yes/N/No) [N]:
-Use JBoss Logging  (Y/Yes/N/No) [N]:
+Resource adapter config properties [enter to quit]: 
+    Name: 
+MessageListener interface name [TcpMessageListener]: 
+ActivationSpec class name [TcpActivationSpec]: 
+ActivationSpec config properties [enter to quit]: 
+    Name: topic
+    Type: String
+    Value: topic1
+    Required (Y/Yes/N/No) [N]: Y
+
+ActivationSpec config properties [enter to quit]: 
+    Name: 
+Activation class name [TcpActivation]: 
+Include an admin object (Y/Yes/N/No) [N]: 
+Use JBoss Logging  (Y/Yes/N/No) [N]: 
 Build environment [A/Ant/I/Ant+Ivy/M/Maven/G/Gradle] [A]: M
 Code generated
 ```
@@ -67,6 +73,7 @@ Next I created a sample ejb project the use with a message driven bean (mdb) the
 resource adapter. I use the fast prototyping tool jboss forge in the jboss tools ide.
 
 In jboss forge:
+
 ```
 [inbound-ra-example]$ project-new --named ra-user-ejb --stack JAVA_EE_7 --build-system Maven
 ***SUCCESS*** Project named 'ra-user-ejb' has been created.
@@ -75,11 +82,11 @@ In jboss forge:
 ***SUCCESS*** EJB has been installed.
 [ra-user-ejb]$ jms-setup
 ***SUCCESS*** JMS has been installed.
-
 ```
 
+
 Open questions are:
-- wth is an admin object? I found no clear description about it. Oracle did not describe it in detail and in the jacamar project I found also nothing
+- what is the task of an admin object? I found no clear description about it. Oracle did not describe it in detail and in the jacamar project I found also nothing.
 
 
 References:
