@@ -21,10 +21,10 @@
  */
 package de.bitc.jca.inflow;
 
-import de.bitc.jca.TcpResourceAdapter;
-
 import javax.resource.ResourceException;
 import javax.resource.spi.endpoint.MessageEndpointFactory;
+
+import de.bitc.jca.TcpResourceAdapter;
 
 /**
  * TcpActivation
@@ -44,7 +44,7 @@ public class TcpActivation {
 
     /**
      * Default constructor
-     * 
+     *
      * @exception ResourceException
      *                Thrown if an error occurs
      */
@@ -54,7 +54,7 @@ public class TcpActivation {
 
     /**
      * Constructor
-     * 
+     *
      * @param ra
      *            TcpResourceAdapter
      * @param endpointFactory
@@ -75,7 +75,7 @@ public class TcpActivation {
 
     /**
      * Get activation spec class
-     * 
+     *
      * @return Activation spec
      */
     public TcpActivationSpec getActivationSpec() {
@@ -84,7 +84,7 @@ public class TcpActivation {
 
     /**
      * Get message endpoint factory
-     * 
+     *
      * @return Message endpoint factory
      */
     public MessageEndpointFactory getMessageEndpointFactory() {
@@ -93,7 +93,7 @@ public class TcpActivation {
 
     /**
      * Start the activation
-     * 
+     *
      * @throws ResourceException
      *             Thrown if an error occurs
      */
@@ -105,6 +105,12 @@ public class TcpActivation {
      * Stop the activation
      */
     public void stop() {
+
+    }
+
+
+    public void sendMessage(String message) {
+
 
     }
 

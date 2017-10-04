@@ -23,12 +23,16 @@
       <groupId>javax</groupId>
       <artifactId>javaee-api</artifactId>
       <scope>provided</scope>
-    </dependency>
+    </dependency><dependency>
+      <groupId>org.jboss.ejb3</groupId>
+      <artifactId>jboss-ejb3-ext-api</artifactId>
+      <scope>provided</scope>
+</dependency>
     <dependency>
       <groupId>de.bitc</groupId>
       <artifactId>tcp-ra</artifactId>
-      <version>0.0.1-SNAPSHOT</version>
     </dependency>
+    
   </dependencies>
 
   <properties>

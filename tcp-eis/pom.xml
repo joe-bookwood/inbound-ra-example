@@ -1,10 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <artifactId>tcp-eis</artifactId>
-  <version>1.0.0-SNAPSHOT</version>
-  <packaging>rar</packaging>
-  <dependencies>
+  <artifactId>tcp-eis</artifactId><name>TCP Resource Adapter Archive</name>
+  <parent>
+    <groupId>de.bitc</groupId>
+    <artifactId>inbound-ra-example</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+  </parent><properties>
+    <maven.compiler.source>1.8</maven.compiler.source>
+    <maven.compiler.target>1.8</maven.compiler.target>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties><dependencies>
     <dependency>
       <groupId>de.bitc</groupId>
       <artifactId>tcp-ra</artifactId>
@@ -12,8 +18,8 @@
     </dependency>
   </dependencies>
   <build>
-    <sourceDirectory>src/main/java</sourceDirectory>
-    <testSourceDirectory>src/test/java</testSourceDirectory>
+<!--     <sourceDirectory>src/main/java</sourceDirectory> -->
+<!--     <testSourceDirectory>src/test/java</testSourceDirectory> -->
     <plugins>
 
       <plugin>
@@ -33,8 +39,7 @@
           <archive>
             <addMavenDescriptor>false</addMavenDescriptor>
           </archive>
-<!--           <finalName>kafka-inbound-ra</finalName> -->
-<!--           <includeJar>true</includeJar> -->
+          <includeJar>false</includeJar>
         </configuration>
       </plugin>
 
@@ -45,16 +50,10 @@
       </plugin>
 
     </plugins>
+    <finalName>tcp-eis</finalName>
   </build>
-  <properties>
-    <failOnMissingWebXml>false</failOnMissingWebXml>
-    <maven.compiler.source>1.8</maven.compiler.source>
-    <maven.compiler.target>1.8</maven.compiler.target>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-  </properties>
-  <parent>
-    <groupId>de.bitc</groupId>
-    <artifactId>inbound-ra-example</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
-  </parent>
+  
+  
+  
+  <url>https://github.com/joe-bookwood/inbound-ra-example</url>
 </project>

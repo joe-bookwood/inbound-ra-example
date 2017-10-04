@@ -32,10 +32,13 @@ import javax.resource.spi.Connector;
 import javax.resource.spi.ResourceAdapter;
 import javax.resource.spi.ResourceAdapterInternalException;
 import javax.resource.spi.endpoint.MessageEndpointFactory;
+import javax.resource.spi.work.WorkException;
+import javax.resource.spi.work.WorkManager;
 import javax.transaction.xa.XAResource;
 
 import de.bitc.jca.inflow.TcpActivation;
 import de.bitc.jca.inflow.TcpActivationSpec;
+import de.bitc.jca.tcp.ServerWork;
 
 /**
  * TcpResourceAdapter
@@ -45,7 +48,10 @@ import de.bitc.jca.inflow.TcpActivationSpec;
 @Connector(displayName = "tcp-ra",
     description = "TCP Recource Adapter",
     eisType = "TCP Recource Adapter",
-    version = "7.0")
+    version = "7.0",
+    vendorName = "bitc",
+    licenseRequired=false,
+    licenseDescription="gpl")
 public class TcpResourceAdapter implements ResourceAdapter, java.io.Serializable {
 
     /** The serial version UID */
@@ -61,12 +67,17 @@ public class TcpResourceAdapter implements ResourceAdapter, java.io.Serializable
     @ConfigProperty(defaultValue = "10345")
     private Integer port;
 
+    /** The bootstrap context holds everything to bootstrap the RA */
+    private BootstrapContext bootstrapContext;
+
+    /** The server waits for external tcp connections */
+    private ServerWork serverWork;
+
     /**
      * Default constructor
      */
     public TcpResourceAdapter() {
         this.activations = new ConcurrentHashMap<TcpActivationSpec, TcpActivation>();
-
     }
 
     /**
@@ -103,7 +114,7 @@ public class TcpResourceAdapter implements ResourceAdapter, java.io.Serializable
             throws ResourceException {
         TcpActivation activation = new TcpActivation(this, endpointFactory, (TcpActivationSpec) spec);
         activations.put((TcpActivationSpec) spec, activation);
-        activation.start();
+
 
         log.finest("endpointActivation()");
 
@@ -139,6 +150,17 @@ public class TcpResourceAdapter implements ResourceAdapter, java.io.Serializable
     public void start(BootstrapContext ctx) throws ResourceAdapterInternalException {
         log.finest("start()");
 
+        final WorkManager workManager = ctx.getWorkManager();
+
+        this.bootstrapContext=ctx;
+
+        this.serverWork = new ServerWork(this);
+
+        try {
+            workManager.startWork(serverWork);
+        } catch (WorkException e) {
+            log.severe("Cant start work: " + e.getMessage());
+        }
     }
 
     /**
@@ -164,6 +186,24 @@ public class TcpResourceAdapter implements ResourceAdapter, java.io.Serializable
     public XAResource[] getXAResources(ActivationSpec[] specs) throws ResourceException {
         log.finest("getXAResources()");
         return null;
+    }
+
+    /**
+     * @return the bootstrapContext
+     */
+    public BootstrapContext getBootstrapContext() {
+        return bootstrapContext;
+    }
+
+    /**
+     * @return the serverWork
+     */
+    public ServerWork getServerWork() {
+        return serverWork;
+    }
+
+    public  ConcurrentHashMap<TcpActivationSpec, TcpActivation> getActivations() {
+        return activations;
     }
 
     /**
@@ -199,10 +239,11 @@ public class TcpResourceAdapter implements ResourceAdapter, java.io.Serializable
         boolean result = true;
         TcpResourceAdapter obj = (TcpResourceAdapter) other;
         if (result) {
-            if (port == null)
+            if (port == null) {
                 result = obj.getPort() == null;
-            else
+            }else {
                 result = port.equals(obj.getPort());
+            }
         }
         return result;
     }
