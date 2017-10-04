@@ -21,7 +21,10 @@
  */
 package de.bitc.jca.inflow;
 
+import java.lang.reflect.Method;
+
 import javax.resource.ResourceException;
+import javax.resource.spi.endpoint.MessageEndpoint;
 import javax.resource.spi.endpoint.MessageEndpointFactory;
 
 import de.bitc.jca.TcpResourceAdapter;
@@ -41,6 +44,22 @@ public class TcpActivation {
 
     /** The message endpoint factory */
     private MessageEndpointFactory endpointFactory;
+
+    /** The MailListener.onMessage method */
+    public static final Method ON_MESSAGE;
+
+    static
+    {
+       try
+       {
+          Class[] sig = {String.class};
+          ON_MESSAGE = TcpMessageListener.class.getMethod("onMessage", sig);
+       }
+       catch (Exception e)
+       {
+          throw new RuntimeException(e);
+       }
+ }
 
     /**
      * Default constructor
@@ -111,7 +130,22 @@ public class TcpActivation {
 
     public void sendMessage(String message) {
 
+        MessageEndpoint endpoint =null;
 
+        try {
+            endpoint = endpointFactory.createEndpoint(null);
+            if(endpoint != null && endpoint instanceof TcpMessageListener) {
+                TcpMessageListener tcpMessageListener = (TcpMessageListener) endpoint;
+
+                tcpMessageListener.onMessage(message);
+            }
+        } catch (Exception e) {
+            // TODO: handle exception
+        } finally {
+            if(endpoint != null) {
+                endpoint.release();
+            }
+        }
     }
 
 }
