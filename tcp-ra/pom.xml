@@ -6,15 +6,12 @@
   <artifactId>tcp-ra</artifactId>
   <packaging>jar</packaging>
   <url>http://repository.jboss.org</url>
-  <properties>
-    <version.org.jboss.ironjacamar>1.3.4.Final</version.org.jboss.ironjacamar>
-  </properties>
+
 
   <dependencies>
     <dependency>
       <groupId>org.jboss.ironjacamar</groupId>
       <artifactId>ironjacamar-spec-api</artifactId>
-      <version>${version.org.jboss.ironjacamar}</version>
       <scope>provided</scope>
     </dependency>
     <dependency> 
@@ -22,108 +19,7 @@
         <artifactId>javaee-api</artifactId>
         <scope>provided</scope>
     </dependency>
-
-
-
-    <dependency>
-      <groupId>org.jboss.ironjacamar</groupId>
-      <artifactId>ironjacamar-arquillian-embedded</artifactId>
-      <version>${version.org.jboss.ironjacamar}</version>
-      <scope>test</scope>
-    </dependency>    
-    <dependency>
-      <groupId>org.jboss.ironjacamar</groupId>
-      <artifactId>ironjacamar-arquillian-embedded-byteman</artifactId>
-      <version>${version.org.jboss.ironjacamar}</version>
-      <scope>test</scope>
-    </dependency>    
-    <dependency>
-      <groupId>org.jboss.ironjacamar</groupId>
-      <artifactId>ironjacamar-common-api</artifactId>
-      <version>${version.org.jboss.ironjacamar}</version>
-      <scope>test</scope>
-    </dependency>    
-    <dependency>
-      <groupId>org.jboss.ironjacamar</groupId>
-      <artifactId>ironjacamar-common-spi</artifactId>
-      <version>${version.org.jboss.ironjacamar}</version>
-      <scope>test</scope>
-    </dependency>   
-    <dependency>
-      <groupId>org.jboss.ironjacamar</groupId>
-      <artifactId>ironjacamar-common-impl</artifactId>
-      <version>${version.org.jboss.ironjacamar}</version>
-      <scope>test</scope>
-    </dependency>    
-    <dependency>
-      <groupId>org.jboss.ironjacamar</groupId>
-      <artifactId>ironjacamar-core-api</artifactId>
-      <version>${version.org.jboss.ironjacamar}</version>
-      <scope>test</scope>
-    </dependency>    
-    <dependency>
-      <groupId>org.jboss.ironjacamar</groupId>
-      <artifactId>ironjacamar-core-impl</artifactId>
-      <version>${version.org.jboss.ironjacamar}</version>
-      <scope>test</scope>
-    </dependency>    
-    <dependency>
-      <groupId>org.jboss.ironjacamar</groupId>
-      <artifactId>ironjacamar-depchain</artifactId>
-      <version>${version.org.jboss.ironjacamar}</version>
-      <scope>test</scope>
-      <type>pom</type>
-    </dependency>   
-    <dependency>
-      <groupId>org.jboss.ironjacamar</groupId>
-      <artifactId>ironjacamar-deployers-common</artifactId>
-      <version>${version.org.jboss.ironjacamar}</version>
-      <scope>test</scope>
-    </dependency>    
-    <dependency>
-      <groupId>org.jboss.ironjacamar</groupId>
-      <artifactId>ironjacamar-deployers-fungal</artifactId>
-      <version>${version.org.jboss.ironjacamar}</version>
-      <scope>test</scope>
-    </dependency>    
-    <dependency>
-      <groupId>org.jboss.ironjacamar</groupId>
-      <artifactId>ironjacamar-embedded</artifactId>
-      <version>${version.org.jboss.ironjacamar}</version>
-      <scope>test</scope>
-    </dependency>    
-    <dependency>
-      <groupId>org.jboss.ironjacamar</groupId>
-      <artifactId>ironjacamar-test-eis</artifactId>
-      <version>${version.org.jboss.ironjacamar}</version>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.jboss.ironjacamar</groupId>
-      <artifactId>ironjacamar-validator</artifactId>
-      <version>${version.org.jboss.ironjacamar}</version>
-      <scope>test</scope>
-    </dependency>
-    
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>4.8.1</version>
-      <scope>test</scope>
-    </dependency>
   </dependencies>
-
-  <dependencyManagement>
-    <dependencies>
-      <dependency>
-        <groupId>org.jboss.ironjacamar</groupId>
-        <artifactId>ironjacamar-depchain</artifactId>
-        <version>${version.org.jboss.ironjacamar}</version>
-        <type>pom</type>
-        <scope>import</scope>
-      </dependency>
-    </dependencies>
-  </dependencyManagement>
   
   <build>
     <sourceDirectory>src/main/java</sourceDirectory>

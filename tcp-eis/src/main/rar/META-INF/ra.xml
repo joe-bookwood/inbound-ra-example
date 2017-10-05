@@ -16,7 +16,7 @@
     <inbound-resourceadapter>
       <messageadapter>
         <messagelistener>
-          <messagelistener-type>de.bitc.jca.TcpResourceAdapter</messagelistener-type>
+          <messagelistener-type>de.bitc.jca.inflow.TcpMessageListener</messagelistener-type>
           <activationspec>
             <activationspec-class>de.bitc.jca.inflow.TcpActivationSpec</activationspec-class>
             <required-config-property>

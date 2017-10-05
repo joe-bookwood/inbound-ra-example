@@ -12,19 +12,20 @@ import de.bitc.jca.inflow.TcpMessageListener;
 /**
  * Message-Driven Bean implementation class for: MessageListenerBean
  */
-@MessageDriven(activationConfig = {
-        @ActivationConfigProperty(propertyName = "topic", propertyValue = "test") },
-            messageListenerInterface = TcpMessageListener.class)
-@ResourceAdapter("tcp-eis-1.0.0-SNAPSHOT.rar")
-public class MessageListenerBean implements TcpMessageListener {
+@MessageDriven(
+        activationConfig = {
+                @ActivationConfigProperty(propertyName = "topic", propertyValue = "test")
+        }, messageListenerInterface = TcpMessageListener.class)
+@ResourceAdapter(value="tcp-eis.rar")
+public class InboundEventHandler implements TcpMessageListener {
 
     /** The logger */
-    private static Logger log = Logger.getLogger(MessageListenerBean.class.getName());
+    private static Logger log = Logger.getLogger(InboundEventHandler.class.getName());
 
     /**
      * Default constructor.
      */
-    public MessageListenerBean() {
+    public InboundEventHandler() {
         // TODO Auto-generated constructor stub
     }
 

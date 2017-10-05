@@ -1,16 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <artifactId>tcp-eis</artifactId><name>TCP Resource Adapter Archive</name>
+  <artifactId>tcp-eis</artifactId>
+  <properties>
+    <maven.compiler.source>1.8</maven.compiler.source>
+    <maven.compiler.target>1.8</maven.compiler.target>
+    <version.org.jboss.ironjacamar>1.3.4.Final</version.org.jboss.ironjacamar>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+  <url>https://github.com/joe-bookwood/inbound-ra-example</url>
+  <name>TCP Resource Adapter Archive</name>
   <parent>
     <groupId>de.bitc</groupId>
     <artifactId>inbound-ra-example</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-  </parent><properties>
-    <maven.compiler.source>1.8</maven.compiler.source>
-    <maven.compiler.target>1.8</maven.compiler.target>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-  </properties><dependencies>
+    <relativePath>..</relativePath>
+  </parent>
+  <dependencies>
     <dependency>
       <groupId>de.bitc</groupId>
       <artifactId>tcp-ra</artifactId>
@@ -18,8 +25,8 @@
     </dependency>
   </dependencies>
   <build>
-<!--     <sourceDirectory>src/main/java</sourceDirectory> -->
-<!--     <testSourceDirectory>src/test/java</testSourceDirectory> -->
+    <sourceDirectory>src/main/java</sourceDirectory>
+    <testSourceDirectory>src/test/java</testSourceDirectory>
     <plugins>
 
       <plugin>
@@ -39,7 +46,7 @@
           <archive>
             <addMavenDescriptor>false</addMavenDescriptor>
           </archive>
-          <includeJar>false</includeJar>
+          <!-- <includeJar>false</includeJar> -->
         </configuration>
       </plugin>
 
@@ -47,13 +54,16 @@
         <groupId>org.wildfly.plugins</groupId>
         <artifactId>wildfly-maven-plugin</artifactId>
         <version>1.2.0.Final</version>
+        <configuration>
+          <commands>
+            <command>/subsystem=resource-adapters/resource-adapter=tcp-eis.rar:add(archive=tcp-eis.rar,transaction-support=NoTransaction)</command>
+          </commands>
+        </configuration>
       </plugin>
 
     </plugins>
+
     <finalName>tcp-eis</finalName>
   </build>
-  
-  
-  
-  <url>https://github.com/joe-bookwood/inbound-ra-example</url>
+  <packaging>rar</packaging>
 </project>

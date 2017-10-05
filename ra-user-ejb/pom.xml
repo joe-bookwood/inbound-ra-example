@@ -2,37 +2,35 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
+  <name>EJB Sample</name>
+  <description>This EJB archive use the inbound resource adapter.</description>
+  <parent>
+    <groupId>de.bitc</groupId>
+    <artifactId>inbound-ra-example</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+  </parent>
   <artifactId>ra-user-ejb</artifactId>
-  <version>1.0.0-SNAPSHOT</version>
+
   <packaging>ejb</packaging>
-  <build>
-    <plugins>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-ejb-plugin</artifactId>
-        <version>3.0.0</version>
-        <configuration>
-          <!-- Tell Maven we are using EJB 3.1 -->
-          <ejbVersion>3.2</ejbVersion>
-        </configuration>
-      </plugin>
-    </plugins>
-  </build>
   <dependencies>
     <dependency>
-      <groupId>javax</groupId>
-      <artifactId>javaee-api</artifactId>
+      <groupId>javax.ejb</groupId>
+      <artifactId>javax.ejb-api</artifactId>
       <scope>provided</scope>
-    </dependency><dependency>
+    </dependency>
+    <dependency>
+      <groupId>javax.jms</groupId>
+      <artifactId>javax.jms-api</artifactId>
+    </dependency>
+    <dependency>
       <groupId>org.jboss.ejb3</groupId>
       <artifactId>jboss-ejb3-ext-api</artifactId>
       <scope>provided</scope>
-</dependency>
+    </dependency>
     <dependency>
       <groupId>de.bitc</groupId>
       <artifactId>tcp-ra</artifactId>
     </dependency>
-    
   </dependencies>
 
   <properties>
@@ -41,11 +39,34 @@
     <maven.compiler.target>1.8</maven.compiler.target>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
-  <parent>
-    <groupId>de.bitc</groupId>
-    <artifactId>inbound-ra-example</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
-  </parent>
-  <name>EJB Sample</name>
-  <description>This EJB archive use the inbound resource adapter.</description>
+
+  <build>
+    <plugins>
+      <!-- <plugin> -->
+      <!-- <groupId>org.apache.maven.plugins</groupId> -->
+      <!-- <artifactId>maven-compiler-plugin</artifactId> -->
+      <!-- <configuration> -->
+      <!-- <source>${maven.compiler.source}</source> -->
+      <!-- <target>${maven.compiler.target}</target> -->
+      <!-- </configuration> -->
+      <!-- </plugin> -->
+
+      <plugin>
+        <artifactId>maven-ejb-plugin</artifactId>
+        <configuration>
+          <!-- Tell Maven we are using EJB 3.2 -->
+          <ejbVersion>3.2</ejbVersion>
+          <archive>
+            <manifest>
+              <addClasspath>true</addClasspath>
+            </manifest>
+          </archive>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.wildfly.plugins</groupId>
+        <artifactId>wildfly-maven-plugin</artifactId>
+      </plugin>
+    </plugins>
+  </build>
 </project>
