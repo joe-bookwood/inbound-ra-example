@@ -45,13 +45,7 @@ import de.bitc.jca.tcp.ServerWork;
  *
  * @version $Revision: $
  */
-@Connector(displayName = "tcp-ra",
-    description = "TCP Recource Adapter",
-    eisType = "TCP Recource Adapter",
-    version = "7.0",
-    vendorName = "bitc",
-    licenseRequired=false,
-    licenseDescription="gpl")
+@Connector(displayName = "tcp-ra", description = "TCP Recource Adapter", eisType = "TCP Recource Adapter", version = "7.0", vendorName = "bitc", licenseRequired = false, licenseDescription = "gpl")
 public class TcpResourceAdapter implements ResourceAdapter, java.io.Serializable {
 
     /** The serial version UID */
@@ -115,7 +109,6 @@ public class TcpResourceAdapter implements ResourceAdapter, java.io.Serializable
         TcpActivation activation = new TcpActivation(this, endpointFactory, (TcpActivationSpec) spec);
         activations.put((TcpActivationSpec) spec, activation);
 
-
         log.finest("endpointActivation()");
 
     }
@@ -152,7 +145,7 @@ public class TcpResourceAdapter implements ResourceAdapter, java.io.Serializable
 
         final WorkManager workManager = ctx.getWorkManager();
 
-        this.bootstrapContext=ctx;
+        this.bootstrapContext = ctx;
 
         this.serverWork = new ServerWork(this);
 
@@ -170,7 +163,9 @@ public class TcpResourceAdapter implements ResourceAdapter, java.io.Serializable
     @Override
     public void stop() {
         log.finest("stop()");
-
+        if (this.serverWork != null) {
+            this.serverWork.release();
+        }
     }
 
     /**
@@ -202,7 +197,7 @@ public class TcpResourceAdapter implements ResourceAdapter, java.io.Serializable
         return serverWork;
     }
 
-    public  ConcurrentHashMap<TcpActivationSpec, TcpActivation> getActivations() {
+    public ConcurrentHashMap<TcpActivationSpec, TcpActivation> getActivations() {
         return activations;
     }
 
@@ -241,7 +236,7 @@ public class TcpResourceAdapter implements ResourceAdapter, java.io.Serializable
         if (result) {
             if (port == null) {
                 result = obj.getPort() == null;
-            }else {
+            } else {
                 result = port.equals(obj.getPort());
             }
         }
