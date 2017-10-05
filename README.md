@@ -37,7 +37,7 @@ I will use the rar packaging format in this example.
 - **ra-ear** a enterprise archive that contain the ejb and the web container
 
 ## Build and use it
-Start the wildfly 10.1.0 application server and go in the top level container and
+Start the wildfly 10.1.0 application server and go in the top level folder and
 execute `mvn install`. The next step is to deploy the resource adapter. Go in the
 tcp-eis folder and execute
 `mvn -X clean install rar:rar wildfly:deploy`. It should run without problems.
