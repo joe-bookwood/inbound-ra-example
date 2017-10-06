@@ -5,8 +5,6 @@ import java.util.logging.Logger;
 import javax.ejb.ActivationConfigProperty;
 import javax.ejb.MessageDriven;
 
-import org.jboss.ejb3.annotation.ResourceAdapter;
-
 import de.bitc.jca.inflow.TcpMessageListener;
 
 /**
@@ -15,8 +13,8 @@ import de.bitc.jca.inflow.TcpMessageListener;
 @MessageDriven(
         activationConfig = {
                 @ActivationConfigProperty(propertyName = "topic", propertyValue = "test")
-        }, messageListenerInterface = TcpMessageListener.class)
-@ResourceAdapter(value="tcp-eis.rar")
+        } //, messageListenerInterface = TcpMessageListener.class
+        )
 public class InboundEventHandler implements TcpMessageListener {
 
     /** The logger */

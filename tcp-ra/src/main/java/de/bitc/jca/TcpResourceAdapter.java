@@ -180,7 +180,7 @@ public class TcpResourceAdapter implements ResourceAdapter, java.io.Serializable
     @Override
     public XAResource[] getXAResources(ActivationSpec[] specs) throws ResourceException {
         log.finest("getXAResources()");
-        return null;
+        return new XAResource[0];
     }
 
     /**
