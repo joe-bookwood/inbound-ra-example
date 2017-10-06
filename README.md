@@ -137,7 +137,7 @@ Caused by: java.lang.NoClassDefFoundError: Failed to link de/bitc/ejb/InboundEve
 ```
 
 The main problem is
-**ailed to link de/bitc/ejb/InboundEventHandler (Module "deployment.ra-ear.ear.ra-user-ejb-0.0.1-SNAPSHOT.jar:main" from Service Module Loader): de/bitc/jca/inflow/TcpMessageListener**
+**Failed to link de/bitc/ejb/InboundEventHandler (Module "deployment.ra-ear.ear.ra-user-ejb-0.0.1-SNAPSHOT.jar:main" from Service Module Loader): de/bitc/jca/inflow/TcpMessageListener**
 and I found no solution.
 
 ## How the example are created
