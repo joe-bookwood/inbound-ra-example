@@ -73,14 +73,72 @@ folder `ra-ear` and execute `mvn wildfly:deploy`. The deployment process start
 and the following error is shown an the console:
 
 ```
-[ERROR] Failed to execute goal org.wildfly.plugins:wildfly-maven-plugin:1.2.0.Final:deploy (default-cli) on project ra-ear: Failed to execute goal deploy: {"WFLYCTL0062: Composite operation failed and was rolled back. Steps that failed:" => {"Operation step-1" => {"WFLYCTL0080: Failed services" => {"jboss.deployment.subunit.\"ra-ear.ear\".\"ra-user-ejb-0.0.1-SNAPSHOT.jar\".component.InboundEventHandler.CREATE" => "org.jboss.msc.service.StartException in service jboss.deployment.subunit.\"ra-ear.ear\".\"ra-user-ejb-0.0.1-SNAPSHOT.jar\".component.InboundEventHandler.CREATE: Failed to start service
-[ERROR] Caused by: java.lang.IllegalStateException: WFLYEJB0383: No message listener of type de.bitc.jca.inflow.TcpMessageListener found in resource adapter tcp-eis.rar"},"WFLYCTL0412: Required services that are not installed:" => ["jboss.deployment.subunit.\"ra-ear.ear\".\"ra-user-ejb-0.0.1-SNAPSHOT.jar\".component.InboundEventHandler.CREATE"],"WFLYCTL0180: Services with missing/unavailable dependencies" => undefined}}}
+2017-10-06 14:39:35,351 WARN  [org.jboss.modules] (MSC service thread 1-7) Failed to define class de.bitc.ejb.InboundEventHandler in Module "deployment.ra-ear.ear.ra-user-ejb-0.0.1-SNAPSHOT.jar:main" from Service Module Loader: java.lang.NoClassDefFoundError: Failed to link de/bitc/ejb/InboundEventHandler (Module "deployment.ra-ear.ear.ra-user-ejb-0.0.1-SNAPSHOT.jar:main" from Service Module Loader): de/bitc/jca/inflow/TcpMessageListener
+        at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+        at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)
+        at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+        at java.lang.reflect.Constructor.newInstance(Constructor.java:423)
+        at org.jboss.modules.ModuleClassLoader.defineClass(ModuleClassLoader.java:446)
+        at org.jboss.modules.ModuleClassLoader.loadClassLocal(ModuleClassLoader.java:274)
+        at org.jboss.modules.ModuleClassLoader$1.loadClassLocal(ModuleClassLoader.java:78)
+        at org.jboss.modules.Module.loadModuleClass(Module.java:606)
+        at org.jboss.modules.ModuleClassLoader.findClass(ModuleClassLoader.java:190)
+        at org.jboss.modules.ConcurrentClassLoader.performLoadClassUnchecked(ConcurrentClassLoader.java:363)
+        at org.jboss.modules.ConcurrentClassLoader.performLoadClass(ConcurrentClassLoader.java:351)
+        at org.jboss.modules.ConcurrentClassLoader.loadClass(ConcurrentClassLoader.java:93)
+        at java.lang.Class.forName0(Native Method)
+        at java.lang.Class.forName(Class.java:348)
+        at org.jboss.as.ee.utils.ClassLoadingUtils.loadClass(ClassLoadingUtils.java:21)
+        at org.jboss.as.ee.utils.ClassLoadingUtils.loadClass(ClassLoadingUtils.java:14)
+        at org.jboss.as.ee.component.deployers.InterceptorAnnotationProcessor.processComponentConfig(InterceptorAnnotationProcessor.java:84)
+        at org.jboss.as.ee.component.deployers.InterceptorAnnotationProcessor.deploy(InterceptorAnnotationProcessor.java:76)
+        at org.jboss.as.server.deployment.DeploymentUnitPhaseService.start(DeploymentUnitPhaseService.java:147)
+        at org.jboss.msc.service.ServiceControllerImpl$StartTask.startService(ServiceControllerImpl.java:1948)
+        at org.jboss.msc.service.ServiceControllerImpl$StartTask.run(ServiceControllerImpl.java:1881)
+        at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+        at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+        at java.lang.Thread.run(Thread.java:748)
+
+2017-10-06 14:39:35,351 ERROR [org.jboss.msc.service.fail] (MSC service thread 1-7) MSC000001: Failed to start service jboss.deployment.subunit."ra-ear.ear"."ra-user-ejb-0.0.1-SNAPSHOT.jar".POST_MODULE: org.jboss.msc.service.StartException in service jboss.deployment.subunit."ra-ear.ear"."ra-user-ejb-0.0.1-SNAPSHOT.jar".POST_MODULE: WFLYSRV0153: Failed to process phase POST_MODULE of subdeployment "ra-user-ejb-0.0.1-SNAPSHOT.jar" of deployment "ra-ear.ear"
+        at org.jboss.as.server.deployment.DeploymentUnitPhaseService.start(DeploymentUnitPhaseService.java:154)
+        at org.jboss.msc.service.ServiceControllerImpl$StartTask.startService(ServiceControllerImpl.java:1948)
+        at org.jboss.msc.service.ServiceControllerImpl$StartTask.run(ServiceControllerImpl.java:1881)
+        at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+        at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+        at java.lang.Thread.run(Thread.java:748)
+Caused by: java.lang.NoClassDefFoundError: Failed to link de/bitc/ejb/InboundEventHandler (Module "deployment.ra-ear.ear.ra-user-ejb-0.0.1-SNAPSHOT.jar:main" from Service Module Loader): de/bitc/jca/inflow/TcpMessageListener
+        at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+        at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)
+        at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+        at java.lang.reflect.Constructor.newInstance(Constructor.java:423)
+        at org.jboss.modules.ModuleClassLoader.defineClass(ModuleClassLoader.java:446)
+        at org.jboss.modules.ModuleClassLoader.loadClassLocal(ModuleClassLoader.java:274)
+        at org.jboss.modules.ModuleClassLoader$1.loadClassLocal(ModuleClassLoader.java:78)
+        at org.jboss.modules.Module.loadModuleClass(Module.java:606)
+        at org.jboss.modules.ModuleClassLoader.findClass(ModuleClassLoader.java:190)
+        at org.jboss.modules.ConcurrentClassLoader.performLoadClassUnchecked(ConcurrentClassLoader.java:363)
+        at org.jboss.modules.ConcurrentClassLoader.performLoadClass(ConcurrentClassLoader.java:351)
+        at org.jboss.modules.ConcurrentClassLoader.loadClass(ConcurrentClassLoader.java:93)
+        at java.lang.Class.forName0(Native Method)
+        at java.lang.Class.forName(Class.java:348)
+        at org.jboss.as.ee.utils.ClassLoadingUtils.loadClass(ClassLoadingUtils.java:21)
+        at org.jboss.as.ee.utils.ClassLoadingUtils.loadClass(ClassLoadingUtils.java:14)
+        at org.jboss.as.ee.component.deployers.InterceptorAnnotationProcessor.processComponentConfig(InterceptorAnnotationProcessor.java:84)
+        at org.jboss.as.ee.component.deployers.InterceptorAnnotationProcessor.deploy(InterceptorAnnotationProcessor.java:76)
+        at org.jboss.as.server.deployment.DeploymentUnitPhaseService.start(DeploymentUnitPhaseService.java:147)
+        ... 5 more
+
+2017-10-06 14:39:35,364 ERROR [org.jboss.as.controller.management-operation] (management-handler-thread - 17) WFLYCTL0013: Operation ("add") failed - address: ([("deployment" => "ra-ear.ear")]) - failure description: {
+    "WFLYCTL0080: Failed services" => {"jboss.deployment.subunit.\"ra-ear.ear\".\"ra-user-ejb-0.0.1-SNAPSHOT.jar\".POST_MODULE" => "org.jboss.msc.service.StartException in service jboss.deployment.subunit.\"ra-ear.ear\".\"ra-user-ejb-0.0.1-SNAPSHOT.jar\".POST_MODULE: WFLYSRV0153: Failed to process phase POST_MODULE of subdeployment \"ra-user-ejb-0.0.1-SNAPSHOT.jar\" of deployment \"ra-ear.ear\"
+    Caused by: java.lang.NoClassDefFoundError: Failed to link de/bitc/ejb/InboundEventHandler (Module \"deployment.ra-ear.ear.ra-user-ejb-0.0.1-SNAPSHOT.jar:main\" from Service Module Loader): de/bitc/jca/inflow/TcpMessageListener"},
+    "WFLYCTL0412: Required services that are not installed:" => ["jboss.deployment.subunit.\"ra-ear.ear\".\"ra-user-ejb-0.0.1-SNAPSHOT.jar\".POST_MODULE"],
+    "WFLYCTL0180: Services with missing/unavailable dependencies" => undefined
 
 ```
 
 The main problem is
-**WFLYEJB0383: No message listener of type de.bitc.jca.inflow.TcpMessageListener found in resource adapter tcp-eis.rar** 
-and I found nothing about it.
+**ailed to link de/bitc/ejb/InboundEventHandler (Module "deployment.ra-ear.ear.ra-user-ejb-0.0.1-SNAPSHOT.jar:main" from Service Module Loader): de/bitc/jca/inflow/TcpMessageListener**
+and I no solution.
 
 ## How the example are created
 
