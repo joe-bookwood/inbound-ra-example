@@ -38,8 +38,15 @@ I will use the rar packaging format in this example.
 
 ## Build and use it
 Start the wildfly 10.1.0 application server and go in the top level folder and
-execute `mvn install`. The next step is to deploy the resource adapter. Go in the
-tcp-eis folder and execute
+execute `mvn install`. The next step is to deploy the resource adapter. 
+
+### Use it inside the ear archive (current)
+If in the `pom.xml` of the ear module the _excluded_ element is set to false in the rar module block, the rar archive is included
+in the ear. in this case the deployment is very simple. In the ear module execute `mvn -X wildfly:deploy` and the ear is deployed to a
+local running Wildfly.
+
+### Use it as RA outside the ear
+Go in the tcp-eis folder and execute
 `mvn -X clean install rar:rar wildfly:deploy`. It should run without problems.
 
 Execute in the home folder of the wildfly 10.1.0 application server
