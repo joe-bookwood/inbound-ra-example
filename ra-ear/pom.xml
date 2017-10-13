@@ -29,19 +29,20 @@
             <ejbModule>
               <groupId>de.bitc</groupId>
               <artifactId>ra-user-ejb</artifactId>
-              <unpack>false</unpack>
+              <moduleId>ra-user-ejb</moduleId>
+              <bundleFileName>ra-user-ejb.jar</bundleFileName>
               <excluded>false</excluded>
             </ejbModule>
             <webModule>
               <groupId>de.bitc</groupId>
               <artifactId>ra-user-web</artifactId>
-              <unpack>false</unpack>
             </webModule>
             <rarModule>
               <groupId>de.bitc</groupId>
               <artifactId>tcp-eis</artifactId>
-              <unpack>false</unpack>
-              <excluded>true</excluded>
+              <moduleId>tcp-eis</moduleId>
+              <bundleFileName>tcp-eis.rar</bundleFileName>
+              <excluded>false</excluded>
             </rarModule>
           </modules>
         </configuration>

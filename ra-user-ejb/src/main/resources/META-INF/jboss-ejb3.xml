@@ -4,7 +4,7 @@
     <jee:assembly-descriptor>
         <mdb:resource-adapter-binding>
             <jee:ejb-name>InboundEventHandler</jee:ejb-name>
-            <mdb:resource-adapter-name>tcp-eis.rar</mdb:resource-adapter-name>
+            <mdb:resource-adapter-name>ra-ear.ear#tcp-eis.rar</mdb:resource-adapter-name>
         </mdb:resource-adapter-binding>
     </jee:assembly-descriptor>
 </jboss>
