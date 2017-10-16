@@ -1,7 +1,7 @@
 # inbound-ra-example
 Example project for an inbound resource adapter on Wildfly 10 application server
 
-** In progress - many open questions **
+** In progress - but the embedded RA in the ear archive works **
 
 ## Introduction
 In this project I want to build a inbound resource adapter, because the documentation
@@ -40,12 +40,14 @@ I will use the rar packaging format in this example.
 Start the wildfly 10.1.0 application server and go in the top level folder and
 execute `mvn install`. The next step is to deploy the resource adapter. 
 
-### Use it inside the ear archive (current)
+### Use it inside the ear archive (current - this version works)
 If in the `pom.xml` of the ear module the _excluded_ element is set to false in the rar module block, the rar archive is included
 in the ear. in this case the deployment is very simple. In the ear module execute `mvn -X wildfly:deploy` and the ear is deployed to a
-local running Wildfly.
+local running Wildfly. There are no other steps required. The deployment descriptor `ra.xml` 
+and the `jboss-ejb3.xml` are not needed. The `@ResourceAdapter(value="ra-ear.ear#tcp-eis.rar")`  annotation is enough. If the RA is deployed in an ear archive, the eararchive name
+is needed, followed by a `#`.
 
-### Use it as RA outside the ear
+### Use it as RA outside the ear (in progress)
 Go in the tcp-eis folder and execute
 `mvn -X clean install rar:rar wildfly:deploy`. It should run without problems.
 
@@ -143,9 +145,6 @@ Caused by: java.lang.NoClassDefFoundError: Failed to link de/bitc/ejb/InboundEve
 
 ```
 
-The main problem is
-**Failed to link de/bitc/ejb/InboundEventHandler (Module "deployment.ra-ear.ear.ra-user-ejb-0.0.1-SNAPSHOT.jar:main" from Service Module Loader): de/bitc/jca/inflow/TcpMessageListener**
-and I found no solution.
 
 ## How the example are created
 

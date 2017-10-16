@@ -37,5 +37,4 @@ public class InboundEventHandler implements TcpMessageListener {
     public void onMessage(String msg) {
         log.fine("Message received in MDB - The Hell ends: "+msg);
     }
-
 }
