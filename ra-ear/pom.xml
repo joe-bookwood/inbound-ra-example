@@ -26,6 +26,13 @@
             have any modules (EJB-JARs and WARs) use them -->
           <defaultLibBundleDir>lib</defaultLibBundleDir>
           <modules>
+            <rarModule>
+              <groupId>de.bitc</groupId>
+              <artifactId>tcp-eis</artifactId>
+              <moduleId>tcp-eis</moduleId>
+              <bundleFileName>tcp-eis.rar</bundleFileName>
+              <excluded>false</excluded>
+            </rarModule>
             <ejbModule>
               <groupId>de.bitc</groupId>
               <artifactId>ra-user-ejb</artifactId>
@@ -36,14 +43,8 @@
             <webModule>
               <groupId>de.bitc</groupId>
               <artifactId>ra-user-web</artifactId>
+              <excluded>true</excluded>
             </webModule>
-            <rarModule>
-              <groupId>de.bitc</groupId>
-              <artifactId>tcp-eis</artifactId>
-              <moduleId>tcp-eis</moduleId>
-              <bundleFileName>tcp-eis.rar</bundleFileName>
-              <excluded>false</excluded>
-            </rarModule>
           </modules>
         </configuration>
       </plugin>
@@ -56,22 +57,6 @@
         <artifactId>wildfly-maven-plugin</artifactId>
       </plugin>
     </plugins>
-    <resources>
-      <resource>
-        <filtering>true</filtering>
-        <directory>src/main/application</directory>
-        <includes>
-          <include>**/*.xml</include>
-        </includes>
-      </resource>
-      <!-- <resource> -->
-      <!-- <directory>src/main/resources</directory> -->
-      <!-- <includes> -->
-      <!-- <include>META-INF/log4j.properties</include> -->
-      <!-- </includes> -->
-      <!-- <targetPath>targetPath</targetPath> -->
-      <!-- </resource> -->
-    </resources>
   </build>
 
   <dependencies>
@@ -85,11 +70,11 @@
       <artifactId>ra-user-ejb</artifactId>
       <type>ejb</type>
     </dependency>
-    <dependency>
-      <groupId>de.bitc</groupId>
-      <artifactId>tcp-ra</artifactId>
-      <scope>provided</scope>
-    </dependency>
+<!--     <dependency> -->
+<!--       <groupId>de.bitc</groupId> -->
+<!--       <artifactId>tcp-ra</artifactId> -->
+<!--       <scope>provided</scope> -->
+<!--     </dependency> -->
     <dependency>
       <groupId>de.bitc</groupId>
       <artifactId>tcp-eis</artifactId>

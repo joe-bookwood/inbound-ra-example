@@ -12,7 +12,7 @@ import de.bitc.jca.inflow.TcpMessageListener;
 /**
  * Message-Driven Bean implementation class for: MessageListenerBean
  */
-@MessageDriven(
+@MessageDriven(name="InboundEventHandler",
         activationConfig = {
                 @ActivationConfigProperty(propertyName = "topic", propertyValue = "test")
         }, messageListenerInterface = TcpMessageListener.class
@@ -35,7 +35,7 @@ public class InboundEventHandler implements TcpMessageListener {
      */
     @Override
     public void onMessage(String msg) {
-        log.fine("Message received: "+msg);
+        log.fine("Message received in MDB - The Hell ends: "+msg);
     }
 
 }

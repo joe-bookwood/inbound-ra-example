@@ -58,11 +58,6 @@
         <configuration>
           <!-- Tell Maven we are using EJB 3.2 -->
           <ejbVersion>3.2</ejbVersion>
-          <archive>
-            <manifest>
-              <addClasspath>true</addClasspath>
-            </manifest>
-          </archive>
         </configuration>
       </plugin>
 
