@@ -51,13 +51,17 @@
           </compilerArguments>
         </configuration>
       </plugin>
-
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-ejb-plugin</artifactId>
         <configuration>
           <!-- Tell Maven we are using EJB 3.2 -->
           <ejbVersion>3.2</ejbVersion>
+          <archive>
+            <manifestEntries>
+              <Class-Path>tcp-ra.jar</Class-Path>
+            </manifestEntries>
+          </archive>
         </configuration>
       </plugin>
 
